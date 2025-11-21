@@ -111,11 +111,6 @@ body {
   margin: 6px 0 0 0;
   color: rgba(255,255,255,0.95);
 }
-/* ===== ADD THIS TO YOUR EXISTING :root VARIABLES ===== */
-:root {
-  /* ... your existing variables ... */
-  --primary-color: #3F7652; /* Add this */
-}
 
 /* ===== ADD THIS NEW SECTION AFTER YOUR EXISTING .main-header ===== */
 
@@ -124,7 +119,7 @@ body {
   background: var(--primary-color) !important;
   position: relative;
   padding-left: clamp(80px, 15vw, 150px) !important;
-  text-align: left !important;
+  text-align: center !important;
 }
 
 .main-header.project-curiosity h1 {
