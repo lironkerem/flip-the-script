@@ -27,6 +27,8 @@
   --radius-2xl: 30px;
   --radius-full: 9999px;
 
+  --primary-color: #3F7652;
+
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
@@ -109,7 +111,72 @@ body {
   margin: 6px 0 0 0;
   color: rgba(255,255,255,0.95);
 }
+/* ===== ADD THIS TO YOUR EXISTING :root VARIABLES ===== */
+:root {
+  /* ... your existing variables ... */
+  --primary-color: #3F7652; /* Add this */
+}
 
+/* ===== ADD THIS NEW SECTION AFTER YOUR EXISTING .main-header ===== */
+
+/* Project Curiosity Branded Header */
+.main-header.project-curiosity {
+  background: var(--primary-color) !important;
+  position: relative;
+  padding-left: clamp(80px, 15vw, 150px) !important;
+  text-align: left !important;
+}
+
+.main-header.project-curiosity h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 5vw + 16px, 70px) !important;
+  color: white;
+  margin: 0;
+  font-weight: 700;
+}
+
+.main-header.project-curiosity h3 {
+  font-family: var(--font-heading);
+  font-size: 2.1875rem;
+  margin: 6px 0 0 0;
+  color: rgba(255,255,255,0.95);
+}
+
+.main-header.project-curiosity::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(55px, 12vw, 120px);
+  height: clamp(55px, 12vw, 120px);
+  background-image: url('https://raw.githubusercontent.com/lironkerem/self-analysis-pro/main/assets/Watermarks/Logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .main-header.project-curiosity {
+    padding-left: 60px !important;
+  }
+  
+  .main-header.project-curiosity::before {
+    width: 40px !important;
+    height: 40px !important;
+    left: 10px !important;
+  }
+  
+  .main-header.project-curiosity h1 {
+    font-size: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-header.project-curiosity::before {
+    left: 5px !important;
+  }
+}
 /* ===== CARDS ===== */
 .card {
   background: var(--neuro-bg);
