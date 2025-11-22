@@ -9,6 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+<!-- PWA Configuration -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#764ba2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flip The Script">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 
 <body>
@@ -25,7 +33,7 @@
         <div class="input-layout">
           <div class="input-main">
             <div class="textarea-wrapper">
-              <textarea id="negative-input" placeholder="Type your negative thought or belief here, to get flipped..." maxlength="500"></textarea>
+              <textarea id="negative-input" placeholder="Type or say your negative thought or belief here.." maxlength="500"></textarea>
               <button id="voice-input-btn" class="voice-input-btn" title="Speak your thought">
                 🎤
               </button>
@@ -49,7 +57,7 @@
         </div>
 
         <div class="btn-group-vertical">
-          <button id="flip-btn" class="btn primary flip-main-btn">✨ Flip It ✨</button>
+          <button id="flip-btn" class="btn primary flip-main-btn">✨ Flip It Now✨</button>
           <button id="clear-btn" class="btn secondary clear-small-btn">Clear</button>
         </div>
 
@@ -149,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let savedFlips = JSON.parse(localStorage.getItem('savedFlips') || '[]');
   let isListening = false;
   let recognition = null;
+  let wasVoiceInput = false;
 
   // ========== Helper Functions ==========
   function showToast(message, duration = 2000) {
@@ -219,7 +228,8 @@ document.addEventListener("DOMContentLoaded", () => {
       input.value = transcript;
       charCount.textContent = transcript.length;
       showToast("✅ Got it! Flipping now...");
-      
+      wasVoiceInput = true;
+
       // Auto-trigger flip after 500ms
       setTimeout(() => {
         if (transcript.trim()) {
@@ -477,10 +487,14 @@ document.addEventListener("DOMContentLoaded", () => {
         extendedFlipEl.classList.remove('text-reveal');
       }, 600);
       
-      // Auto-speak the flipped result
-      setTimeout(() => {
-        speakText(extendedFlipEl.textContent);
-      }, 800);
+if (wasVoiceInput) {
+  setTimeout(() => {
+    speakText(extendedFlipEl.textContent);
+    wasVoiceInput = false; // Reset flag after use
+  }, 800);
+} else {
+  wasVoiceInput = false; // Reset flag anyway
+}
     } catch (err) {
       console.error(err);
       extendedFlipEl.textContent = "Error generating flip.";
@@ -680,5 +694,15 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Shortcuts: Cmd/Ctrl+Enter=Flip | Cmd/Ctrl+S=Save | Esc=Clear");
 });
   </script>
+<!-- PWA Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+      .catch(err => console.error('❌ Service Worker registration failed:', err));
+  });
+}
+</script>
 </body>
 </html>

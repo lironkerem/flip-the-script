@@ -116,10 +116,10 @@ body {
 
 /* Project Curiosity Branded Header */
 .main-header.project-curiosity {
-  background: var(--primary-color) !important;
+  background: linear-gradient(135deg, var(--neuro-accent), var(--neuro-accent-light)) !important;
   position: relative;
-  padding-left: clamp(80px, 15vw, 150px) !important;
-  text-align: center !important;
+  padding: 15px 24px !important; /* Reduced height */
+  text-align: center !important; /* Center the text */
 }
 
 .main-header.project-curiosity h1 {
@@ -153,7 +153,7 @@ body {
 
 @media (max-width: 768px) {
   .main-header.project-curiosity {
-    padding-left: 60px !important;
+    padding: 12px 24px !important; /* Even smaller on mobile */
   }
   
   .main-header.project-curiosity::before {
@@ -164,6 +164,10 @@ body {
   
   .main-header.project-curiosity h1 {
     font-size: 24px !important;
+  }
+  
+  .main-header.project-curiosity h3 {
+    font-size: 1.5rem !important;
   }
 }
 
@@ -1187,7 +1191,66 @@ textarea:focus, input:focus, select:focus {
     padding: 1.5rem;
   }
 }
+/* ===== ADD THIS TO YOUR @media (max-width: 768px) SECTION ===== */
 
+@media (max-width: 768px) {
+  /* ... your existing mobile styles ... */
+  
+  /* Saved Flips Section - Responsive Text */
+  .collapse-toggle h2 {
+    font-size: clamp(1.5rem, 5vw, 3.125rem) !important;
+  }
+  
+  .collapse-icon {
+    font-size: clamp(1.25rem, 4vw, 2.1875rem) !important;
+  }
+  
+  .saved-item p {
+    font-size: clamp(1rem, 3.5vw, 1.5625rem) !important;
+    line-height: 1.4;
+  }
+  
+  .small-btn {
+    font-size: clamp(0.875rem, 2.5vw, 1.125rem) !important;
+    padding: 4px 8px !important;
+  }
+  
+  .search-input {
+    font-size: clamp(1rem, 3.5vw, 1.5625rem) !important;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .collapse-toggle {
+    padding: 12px 16px !important;
+  }
+  
+  .collapse-toggle h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .collapse-icon {
+    font-size: 1.25rem !important;
+  }
+  
+  .saved-item {
+    padding: 10px !important;
+  }
+  
+  .saved-item p {
+    font-size: 1rem !important;
+  }
+  
+  .small-btn {
+    font-size: 0.875rem !important;
+    padding: 4px 6px !important;
+  }
+  
+  .action-icons {
+    gap: 5px !important;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
